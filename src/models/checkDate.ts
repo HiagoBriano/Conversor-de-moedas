@@ -6,7 +6,6 @@ async function checkDateModel(id: number) {
       'SELECT created_at FROM improving.record WHERE id = ?;',
       [id]
     );
-    console.log(date);
 
     return date[0].created_at;
   } catch (error) {
