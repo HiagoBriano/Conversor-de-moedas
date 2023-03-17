@@ -9,20 +9,14 @@ interface ExchangeRates {
   result: number;
 }
 
-interface Error {
-  data: {
-    message: string;
-  };
-}
-
 const key = process.env.API_KEY;
 
 const exchangeRates = async (
   to: string,
   from: string,
   amount: number
-): Promise<ExchangeRates | Error> => {
-  const response: ExchangeRates | Error = await axios
+): Promise<ExchangeRates> => {
+  const response = await axios
     .get(
       `https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`,
       {
@@ -31,8 +25,8 @@ const exchangeRates = async (
         },
       }
     )
-    .then((response) => response.data)
-    .catch((response) => response.data);
+    .then((response) => response.data as ExchangeRates)
+    .catch(error => error);
   return response;
 };
 
