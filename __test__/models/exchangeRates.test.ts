@@ -9,7 +9,7 @@ describe('exchangeRates', () => {
       success: true,
       query: { from: 'USD', to: 'EUR', amount: 10 },
       info: { timestamp: 1647487201, rate: 0.846208 },
-      date: '2022-03-15',
+      date: '2023-03-17T22:48:44.016Z',
       result: 8.46208,
     };
 
