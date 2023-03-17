@@ -7,7 +7,7 @@ jest.mock('../../src/models/connection', () => {
   };
 });
 
-describe('checkDateModel', () => {
+describe('consultTransactionsModel', () => {
   const date = new Date();
 
   it('should return a date', async () => {
