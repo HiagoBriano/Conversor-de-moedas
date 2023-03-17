@@ -10,7 +10,7 @@ jest.mock('../../src/models/connection', () => {
 describe('consultTransactionsModel', () => {
   const date = new Date();
 
-  it('should return a date', async () => {
+  it('must return the transactions', async () => {
     const mock = [
       [
         {
