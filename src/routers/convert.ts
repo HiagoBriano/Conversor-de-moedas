@@ -5,10 +5,16 @@ import validateFromField from '../middlewares/validateFromField';
 import validateToField from '../middlewares/validateToField';
 import validateUserId from '../middlewares/validateUserId';
 
-const routerConvert = Router();
+const convertRouter = Router();
 
-routerConvert
+convertRouter
   .route('/:userId')
-  .get(validateUserId, validateToField, validateFromField, validateAmountField, convertController);
+  .get(
+    validateUserId,
+    validateToField,
+    validateFromField,
+    validateAmountField,
+    convertController
+  );
 
-export default routerConvert;
+export default convertRouter;
