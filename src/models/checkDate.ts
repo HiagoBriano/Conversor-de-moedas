@@ -9,7 +9,7 @@ async function checkDateModel(id: number) {
 
     return date[0].created_at;
   } catch (error) {
-    console.log('Error querying email');
+    console.log('Error fetching date and time');
     throw new Error('error');
   }
 }
