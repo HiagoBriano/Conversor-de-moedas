@@ -14,15 +14,14 @@ const CreateUserController = async (
     if (response === 'E-mail already registered') {
       return res.status(401).json({ message: response });
     }
-    if (response) {
-      const token = await createToken(response.insertId, email);
-      return res.status(201).json({
-        id: response.insertId,
-        name: name,
-        email: email,
-        token: token,
-      });
-    }
+
+    const token = await createToken(response.insertId, email);
+    return res.status(201).json({
+      id: response.insertId,
+      name: name,
+      email: email,
+      token: token,
+    });
   } catch (error) {
     next(error);
   }
