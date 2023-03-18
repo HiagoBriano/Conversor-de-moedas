@@ -95,7 +95,8 @@ http://localhost:3001/
 
 ### Link
 
-- URL padrão da Api: http://localhost:3001/
+- URL da API (Link  público): https://4f41-187-84-34-132.sa.ngrok.io/
+- `Observação: Link compartilhado através do ngrok`
 
 ### /
 
