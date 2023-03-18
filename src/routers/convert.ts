@@ -9,7 +9,7 @@ const convertRouter = Router();
 
 convertRouter
   .route('/')
-  .get(
+  .post(
     validateToken,
     validateToField,
     validateFromField,

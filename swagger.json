@@ -1,0 +1,465 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API to convert currency value",
+    "description": "This is an API that converts money value between BRL, USD, EUR, JPY currencies",
+    "contact": {
+      "name": "Hiago Briano",
+      "email": "hiago.artist@hotmail.com",
+      "url": "https://www.linkedin.com/in/hiago-briano/"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/convert": {
+      "post": {
+        "summary": "Converts money value between BRL, USD, EUR, JPY currencies",
+        "description": "This route is responsible for converting the currency and registering the query in the database.",
+        "tags": ["Convert"],
+        "security": [{ "User token": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Convert"
+              },
+              "example": {
+                "from": "BRL",
+                "to": "USD",
+                "amount": 100
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ConvertResponse"
+                },
+                "example": {
+                  "transactionId": 2,
+                  "userId": 2,
+                  "originCurrency": "BRL",
+                  "originValue": 100,
+                  "destinationCurrency": "USD",
+                  "destinationValue": 18.9415,
+                  "conversionRateUsed": 0.189415,
+                  "date": "2023-03-18T21:12:20.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "if you don't send token or fields 'from', 'to' and 'amount'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "it is mandatory to send the field 'from'"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "if the token sent is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consult": {
+      "get": {
+        "summary": "Check executed transactions",
+        "description": "This route shows the history of transactions that the user has performed.",
+        "tags": ["Consult"],
+        "security": [{ "User token": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ConsultResponse"
+                },
+                "example": [
+                  {
+                      "id": 1,
+                      "user_id": 2,
+                      "origin_currency": "USD",
+                      "origin_value": 5,
+                      "destination_currency": "BRL",
+                      "conversion_rate_used": 5.279404,
+                      "created_at": "2023-03-18T18:47:20.000Z"
+                  },
+                  {
+                      "id": 2,
+                      "user_id": 2,
+                      "origin_currency": "BRL",
+                      "origin_value": 100,
+                      "destination_currency": "USD",
+                      "conversion_rate_used": 0.189415,
+                      "created_at": "2023-03-18T21:12:20.000Z"
+                  },
+                  {
+                      "id": 3,
+                      "user_id": 2,
+                      "origin_currency": "BRL",
+                      "origin_value": 100,
+                      "destination_currency": "USD",
+                      "conversion_rate_used": 0.189415,
+                      "created_at": "2023-03-18T21:36:11.000Z"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Sending the token is mandatory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "it is mandatory to send the field 'from'"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "if the token sent is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Create user",
+        "description": "This route creates a new user.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "name": "Hiago B",
+                "email": "git@git.com",
+                "password": "102030"
+            }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserAndLoginResponse"
+                },
+                "example": {
+                  "id": 2,
+                  "name": "Hiago B",
+                  "email": "git@git.com",
+                  "token": "eyJhbGciOiJIUz...tGQlGjJDMkCfGyVcB4UhpE3EAgr8"
+              }
+              }
+            }
+          },
+          "400": {
+            "description": "if you do not send the fields 'name', 'email' and 'password'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Sending the name is mandatory"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You can only have 1 registration per email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "E-mail already registered"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "This route allows you to login with the previously registered email.",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Login"
+              },
+              "example": {
+                "email": "git@git.com",
+                "password": "102030"
+            }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserAndLoginResponse"
+                },
+                "example": {
+                  "id": 2,
+                  "name": "Hiago B",
+                  "email": "git@git.com",
+                  "token": "eyJhbGciOiJIUz...tGQlGjJDMkCfGyVcB4UhpE3EAgr8"
+              }
+              }
+            }
+          },
+          "400": {
+            "description": "if you do not send the fields 'email' and 'password'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Sending the email is mandatory"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "if email or password is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "E-mail not registered"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Convert": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "enum": ["BRL", "USD", "EUR", "JPY"]
+          },
+          "to": {
+            "type": "string",
+            "enum": ["BRL", "USD", "EUR", "JPY"]
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      },
+      "ConvertResponse": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "originCurrency": {
+            "type": "string"
+          },
+          "originValue": {
+            "type": "number"
+          },
+          "destinationCurrency": {
+            "type": "string"
+          },
+          "destinationValue": {
+            "type": "number"
+          },
+          "conversionRateUsed": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "ConsultResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "origin_currency": {
+            "type": "string"
+          },
+          "origin_value": {
+            "type": "number"
+          },
+          "destination_currency": {
+            "type": "string"
+          },
+          "conversion_rate_used": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserAndLoginResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "User token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
