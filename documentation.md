@@ -1,3 +1,5 @@
+`Observação:` Documentação feita baseada na forma de visualizar do Github, você pode visualizar melhor com a extensão “Markdown Preview Github Styling” do Vs Code.
+
 # Conversor de moedas
 
 <div align="center"><br>
