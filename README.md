@@ -1,51 +1,187 @@
 # Conversor de moedas
 
-Você deverá implementar uma API Rest que seja capaz de realizar a conversão entre duas moedas
-utilizando taxas de conversões atualizadas de um serviço externo.
+<div align="center"><br>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg" alt="TypeScript" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJs" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" width="40" height="40"/>
+  <img src="https://wsofter.ru/wp-content/uploads/2017/12/node-express.png" alt="Express" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain-wordmark.svg" alt="MySQL" width="40" height="40"/>
+</div>
 
-Para realização da conversão é necessário o ID do usuário que deseja realizar a conversão.
+## VisÃ£o geral
 
-A API deverá registrar cada transação de conversão com todas as informações relacionadas e também
-disponibilizar um endpoint para consulta das transações realizadas por um usuário.
+### Desafio
 
-O projeto deverá ser feito em Node.js com TypeScript.
+Implementar uma API Rest que seja capaz de realizar a conversÃ£o entre duas moedas utilizando taxas de conversÃµes atualizadas de um serviÃ§o externo.
 
-1. Deve ser possível realizar a conversão entre 4 moedas no mínimo (BRL, USD, EUR, JPY);
-1. As taxas de conversão devem ser obtidas de [https://api.exchangeratesapi.io/latest?base=EUR] 
-  (Usar a API Free - Tem limitação de requisições, e apenas conversão com base na moeda EUR);
-1. As transações de conversão devem ser persistidas no banco de dados (embedded) contendo:
-    * ID do usuário;
-    * Moeda origem;
-    * Valor origem;
-    * Moeda destino;
-    * Taxa de conversão utilizada;
-    * Data/Hora UTC;
-1. Uma transação com sucesso deve retornar:
-    * ID da transação
-    * ID do usuário;
-    * Moeda origem;
-    * Valor origem;
-    * Moeda destino;
-    * Valor destino;
-    * Taxa de conversão utilizada;
-    * Data/Hora UTC;
-1. Os casos de falha devem retornar com status code pertinente e descrição no corpo;
-1. Deverá existir um endpoint para listagem de todas as transações realizadas por usuário;
-1. Deve haver uma cobertura satisfatória de testes;
-1. Deve-se adicionar a esse arquivo explicações sobre como rodar a aplicação, e uma apresentação sobre o
-projeto: propósito, features, motivação das principais escolhas de tecnologias, e separação das camadas;
-1. Todo o código deve ser em inglês;
-1. Disponibilizar o código apenas nesse repositório, sem nenhuma cópia pública, para evitar plágio;
+**Os usuÃ¡rios sÃ£o capazes de:**
 
-## Itens desejáveis
-* Logs
-* Tratamento de exceções
-* Documentação
-* Coesão de commits
-* Mensagens de commits claras
-* Configuração de lint
-* Testes unitários
-* Testes de integração
-* Documentação dos endpoints
-* Estar rodando e disponível (Ex: Heroku, ou similar)
-* CI/CD
+- Converter valores entre as moedas: BRL, USD, EUR, JPY
+- Consultar histÃ³rico de suas conversÃµes
+- Consumir a API de qualquer plataforma via HTTP
+
+### ConstruÃ­do com
+
+- TypeScript
+- Node.js
+- Express.js
+- Axios
+- MySQL
+- Jest e Supertest
+
+## Rode em sua maquina usando o Docker
+
+<details>
+  <summary><b>Requisitos:</b></summary><br>
+  
+  - Ter o `Git` instalado em sua mÃ¡quina;
+  - Ter o `docker` instalado e ativado em sua mÃ¡quina.
+  - Ter o `bitbucket` configurado sua mÃ¡quina com acesso a esse [repositÃ³rio](https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com/src/master/).
+  
+</details>
+
+<details>
+  <summary><b>Clonar</b></summary><br>
+
+Para clonar o repositÃ³rio usando HTTPS:
+
+```
+git clone https://HiagoBri@bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com.git
+```
+
+Para clonar usando SSH:
+
+```
+git clone git@bitbucket.org:recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com.git
+```
+</details>
+
+<details>
+  <summary><b>Iniciar</b></summary><br>
+
+Entre na pasta principal:
+
+```
+cd recrutamento-conversor-nodejs-hiago.artist_hotmail.com
+```
+
+Crie um arquivo `.env` com as seguintes informaÃ§Ãµes:
+
+```JSON
+MYSQL_HOST=mysql
+API_KEY=G1234567890 //Essa Ã© a chave de acesso do site https://api.exchangeratesapi.io/
+```
+  
+Inicie o docker com o comando:
+
+```
+docker-compose up -d
+```
+
+A API irÃ¡ funcionar atravÃ©s da URL:
+
+```
+http://localhost:3001/
+```
+
+</details>
+
+</details>
+
+## Endpoints
+
+### Link
+
+- URL padrÃ£o da Api: http://localhost:3001/
+
+### /
+
+<details><summary><strong>Verifica se a API estÃ¡ funcionando</strong></summary><br />
+
+- MÃ©todos de requisiÃ§Ã£o: GET
+
+- Formato da resposta:
+
+```json
+{
+    "message": "active server"
+}
+```
+
+</details>
+</details>
+
+### /convert/(id_usuario)
+
+<details><summary><strong>Converter valor</strong></summary><br />
+
+- MÃ©todos de requisiÃ§Ã£o: GET
+
+- Formato do body:
+
+```json
+{
+    "to": "USD",
+    "from": "BRL",
+    "amount": 5
+}
+```
+
+- Formato da resposta:
+
+```json
+{
+    "transactionId": 1,
+    "userId": 10,
+    "originCurrency": "BRL",
+    "originValue": 5,
+    "destinationCurrency": "USD",
+    "destinationValue": 0.947095,
+    "conversionRateUsed": 0.189419,
+    "date": "2023-03-18T00:50:29.000Z"
+}
+```
+
+</details>
+</details>
+
+### /consult/(id_usuario)
+
+<details><summary><strong>Buscar consultas realizadas pelo usuÃ¡rio</strong></summary><br />
+
+- MÃ©todos de requisiÃ§Ã£o: GET
+
+- Formato da resposta:
+
+```json
+[
+    {
+        "id": 1,
+        "user_id": 10,
+        "origin_currency": "BRL",
+        "origin_value": 5,
+        "destination_currency": "USD",
+        "conversion_rate_used": 0.189419,
+        "created_at": "2023-03-18T03:19:40.000Z"
+    },
+    {
+        "id": 2,
+        "user_id": 10,
+        "origin_currency": "BRL",
+        "origin_value": 5,
+        "destination_currency": "USD",
+        "conversion_rate_used": 0.189419,
+        "created_at": "2023-03-18T03:19:43.000Z"
+    }
+]
+```
+
+</details>
+</details>
+
+## Autor
+
+Linkedin - [Hiago Briano](https://www.linkedin.com/in/hiago-briano/)
+
+Email - hiago.artist@hotmail.com
