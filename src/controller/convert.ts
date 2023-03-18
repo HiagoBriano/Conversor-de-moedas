@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import convertService from '../services/convert';
+import { readToken } from '../services/safety';
 
 const convertController = async (
   req: Request,
@@ -8,8 +9,10 @@ const convertController = async (
 ) => {
   try {
     const { to, from, amount } = req.body;
-    const { userId } = req.params;
-    const result = await convertService(parseInt(userId), to, from, amount);
+    const token = req.headers.authorization;
+    const tokenRead = readToken(token as string);
+
+    const result = await convertService(tokenRead?.id as number, to, from, amount);
     res.status(200).json(result);
   } catch (error) {
     next(error);

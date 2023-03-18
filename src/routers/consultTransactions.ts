@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import consultTransactionsController from '../controller/consultTransactions';
-import validateUserId from '../middlewares/validateUserId';
+import validateToken from '../middlewares/validateToken';
 
 const consultTransactionsRouter = Router();
 
 consultTransactionsRouter
-  .route('/:userId')
-  .get(validateUserId, consultTransactionsController);
+  .route('/')
+  .get(validateToken, consultTransactionsController);
 
 export default consultTransactionsRouter;

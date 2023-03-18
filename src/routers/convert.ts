@@ -3,14 +3,14 @@ import convertController from '../controller/convert';
 import validateAmountField from '../middlewares/validateAmountField';
 import validateFromField from '../middlewares/validateFromField';
 import validateToField from '../middlewares/validateToField';
-import validateUserId from '../middlewares/validateUserId';
+import validateToken from '../middlewares/validateToken';
 
 const convertRouter = Router();
 
 convertRouter
-  .route('/:userId')
+  .route('/')
   .get(
-    validateUserId,
+    validateToken,
     validateToField,
     validateFromField,
     validateAmountField,
