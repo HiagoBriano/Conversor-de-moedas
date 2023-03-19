@@ -44,17 +44,18 @@ describe('Route /user', () => {
       warningStatus: 0,
     });
 
-    // const mock = {
-    //   id: 1,
-    //   name: 'Hiago B',
-    //   email: 'git@git.com',
-    //   token: 'eyJhbGciOiJIUz...tGQlGjJDMkCfGyVcB4UhpE3EAgr8',
-    // };
+    const mock = {
+      id: 1,
+      name: 'Hiago B',
+      email: 'git@git.com',
+      token: 'eyJhbGciOiJIUz...tGQlGjJDMkCfGyVcB4UhpE3EAgr8',
+    };
 
     const response = await request(app)
       .post('/user')
       .send({ name: 'Hiago B', email: 'git@git.com', password: '102030' });
 
     expect(response.status).toBe(201);
+    expect(response.body).toStrictEqual(mock);
   });
 });
