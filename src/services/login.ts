@@ -1,9 +1,9 @@
-import consultUserByEmail from '../models/consultUserByEmail';
+import consultUserByEmailModel from '../models/consultUserByEmail';
 import { validBcrypt } from './safety';
 
 const loginService = async (email: string, password: string) => {
   try {
-    const user = await consultUserByEmail(email);
+    const user = await consultUserByEmailModel(email);
 
     if (!user.length) {
       return 'E-mail not registered';
