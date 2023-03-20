@@ -11,29 +11,6 @@ describe('consultTransactionsModel', () => {
   const date = new Date();
 
   it('must return the transactions', async () => {
-    const mock = [
-      [
-        {
-          id: 1,
-          user_id: 10,
-          origin_currency: 'BRL',
-          origin_value: 5,
-          destination_currency: 'USD',
-          conversion_rate_used: 0.189422,
-          created_at: date,
-        },
-        {
-          id: 2,
-          user_id: 10,
-          origin_currency: 'BRL',
-          origin_value: 5,
-          destination_currency: 'USD',
-          conversion_rate_used: 0.189422,
-          created_at: date,
-        },
-      ],
-    ];
-
     const response = [
       {
         id: 1,
@@ -54,6 +31,9 @@ describe('consultTransactionsModel', () => {
         created_at: date,
       },
     ];
+    
+    const mock = [response];
+
     connection.execute.mockResolvedValue(mock);
     const result = await consultTransactionsModel(10);
 
