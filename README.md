@@ -37,13 +37,13 @@ Implementar uma API Rest que seja capaz de realizar a conversão entre duas moed
 Para clonar o repositório usando HTTPS:
 
 ```
-git clone https://HiagoBri@bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com.git
+git clone https://github.com/HiagoBriano/Conversor-de-moedas.git
 ```
 
 Para clonar usando SSH:
 
 ```
-git clone git@bitbucket.org:recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com.git
+git clone git@github.com:HiagoBriano/Conversor-de-moedas.git
 ```
 
 `Iniciar`
