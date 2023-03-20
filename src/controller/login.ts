@@ -15,7 +15,7 @@ const loginController = async (
       return res.status(401).json({ message: result });
     }
 
-    const token = createToken(result[0].id, result[0].email);
+    const token = await createToken(result[0].id, result[0].email);
 
     return res.status(200).json({
       id: result[0].id,
