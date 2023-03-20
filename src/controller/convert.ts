@@ -13,7 +13,7 @@ const convertController = async (
   try {
     const { to, from, amount } = req.body;
     const token = req.headers.authorization;
-    const tokenRead = readToken(token as string);
+    const tokenRead = await readToken(token as string);
 
     logger.info(
       `ID ${tokenRead?.id} requested conversion between currencies ${to} and ${from}`,
