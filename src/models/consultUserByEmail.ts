@@ -1,4 +1,7 @@
+import logger from '../log/logger';
 import connection from './connection';
+
+const file = { file: './src/models/consultUserByEmail.ts' };
 
 interface User {
   id: number;
@@ -17,7 +20,7 @@ async function consultUserByEmailModel(email: string): Promise<[User]> {
 
     return consultUserByEmail;
   } catch (error) {
-    console.log('Error querying email');
+    logger.error('Error connecting to the database', file);
     throw new Error('Error');
   }
 }

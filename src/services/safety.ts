@@ -2,7 +2,7 @@ const { compareSync, hash } = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-const SECRET = process.env.SECRET || 'invalid';
+const SECRET = process.env.SECRET || 'SuperSecretPassword';
 
 interface IEmail {
   id: number;

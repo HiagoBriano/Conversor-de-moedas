@@ -1,4 +1,7 @@
+import logger from '../log/logger';
 import connection from './connection';
+
+const file = { file: './src/models/consultTransactions.ts' };
 
 async function consultTransactionsModel(userId: number) {
   try {
@@ -9,7 +12,7 @@ async function consultTransactionsModel(userId: number) {
 
     return data;
   } catch (error) {
-    console.log('Error when querying transactions');
+    logger.error('Error connecting to the database', file);
     throw new Error('error');
   }
 }

@@ -1,4 +1,7 @@
+import logger from '../log/logger';
 import connection from './connection';
+
+const file = { file: './src/models/createUser.ts' };
 
 interface UserCreated {
   fieldCount: number;
@@ -22,7 +25,7 @@ const createUserModel = async (
 
     return createdUser as UserCreated;
   } catch (error) {
-    console.log('Error creating new user');
+    logger.error('Error connecting to the database', file);
     throw new Error('Error');
   }
 };

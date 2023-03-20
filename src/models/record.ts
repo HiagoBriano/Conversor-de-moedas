@@ -1,4 +1,7 @@
+import logger from '../log/logger';
 import connection from './connection';
+
+const file = { file: './src/models/record.ts' };
 
 interface Record {
   fieldCount: number;
@@ -30,7 +33,7 @@ const recordModel = async (
 
     return record as Record;
   } catch (error) {
-    console.log('error registering query');
+    logger.error('Error connecting to the database', file);
     throw new Error('error');
   }
 };

@@ -1,5 +1,7 @@
 import connection from './connection';
+import logger from '../log/logger';
 
+const file = { file: './src/models/checkDate.ts' };
 async function checkDateModel(id: number) {
   try {
     const [date] = await connection.execute(
@@ -9,7 +11,7 @@ async function checkDateModel(id: number) {
 
     return date[0].created_at;
   } catch (error) {
-    console.log('Error fetching date and time');
+    logger.error('Error connecting to the database', file);
     throw new Error('error');
   }
 }

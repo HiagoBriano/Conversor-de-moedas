@@ -1,5 +1,8 @@
+import logger from '../log/logger';
 import consultUserByEmailModel from '../models/consultUserByEmail';
 import createUserModel from '../models/createUser';
+
+const file = { file: 'src/services/CreateUser.ts' };
 
 const createUserService = async (
   name: string,
@@ -14,7 +17,8 @@ const createUserService = async (
 
       return newUserData;
     }
-
+    
+    logger.warn(`E-mail ${email} already registered`, file);
     return 'E-mail already registered';
   } catch (error) {
     throw new Error('error');

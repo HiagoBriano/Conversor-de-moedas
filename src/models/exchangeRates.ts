@@ -1,5 +1,8 @@
 import axios from 'axios';
+import logger from '../log/logger';
 require('dotenv/config');
+
+const file = { file: './src/models/exchangeRates.ts' };
 
 interface ExchangeRates {
   success: boolean;
@@ -26,7 +29,10 @@ const exchangeRates = async (
       }
     )
     .then((response) => response.data as ExchangeRates)
-    .catch(error => error);
+    .catch((error) => {
+      logger.error(`Error fetching API information - ${error}`, file);
+      throw new Error('Error');
+    });
   return response;
 };
 
