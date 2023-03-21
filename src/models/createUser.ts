@@ -18,12 +18,12 @@ const createUserModel = async (
   password: string
 ) => {
   try {
-    const [createdUser] = await connection.execute(
-      'INSERT INTO improving.users(name, email, password)  VALUES (?, ?, ?);',
+    const results = await connection.query(
+      'INSERT INTO users(name, email, password)  VALUES ($1, $2, $3) RETURNING id;',
       [name, email, password]
     );
 
-    return createdUser as UserCreated;
+    return results.rows[0].id;
   } catch (error) {
     logger.error('Error connecting to the database', file);
     throw new Error('Error');

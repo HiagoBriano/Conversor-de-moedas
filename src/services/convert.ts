@@ -10,23 +10,23 @@ const convertService = async (
 ) => {
   try {
     const response = await exchangeRates(to, from, amount);
-    const { insertId } = await recordModel(
+    const {id, data} = await recordModel(
       userId,
       from,
       amount,
       to,
       response.info.rate
     );
-    const date = await checkDateModel(insertId);
+    // const date = await checkDateModel({insertId});
     const result = {
-      transactionId: insertId,
+      transactionId: id,
       userId: userId,
       originCurrency: from,
       originValue: amount,
       destinationCurrency: to,
       destinationValue: response.result,
       conversionRateUsed: response.info.rate,
-      date,
+      data,
     };
 
     return result;

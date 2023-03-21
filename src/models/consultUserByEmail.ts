@@ -1,5 +1,5 @@
 import logger from '../log/logger';
-import connection from './connection';
+import pool from './connection';
 
 const file = { file: './src/models/consultUserByEmail.ts' };
 
@@ -13,12 +13,12 @@ interface User {
 
 async function consultUserByEmailModel(email: string): Promise<[User]> {
   try {
-    const [consultUserByEmail] = await connection.execute(
-      'SELECT * FROM improving.users WHERE email = ?;',
+    const { rows } = await pool.query(
+      'SELECT * FROM users WHERE email = $1;',
       [email]
     );
 
-    return consultUserByEmail;
+    return rows;
   } catch (error) {
     logger.error('Error connecting to the database', file);
     throw new Error('Error');

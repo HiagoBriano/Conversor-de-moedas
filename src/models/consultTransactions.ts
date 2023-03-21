@@ -5,12 +5,12 @@ const file = { file: './src/models/consultTransactions.ts' };
 
 async function consultTransactionsModel(userId: number) {
   try {
-    const [data] = await connection.execute(
-      'SELECT * FROM improving.record WHERE user_id = ?;',
+    const { rows } = await connection.query(
+      'SELECT * FROM record WHERE user_id = $1;',
       [userId]
     );
 
-    return data;
+    return rows;
   } catch (error) {
     logger.error('Error connecting to the database', file);
     throw new Error('error');

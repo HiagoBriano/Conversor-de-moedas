@@ -1,12 +1,21 @@
-FROM mysql:5.7
+# Informa a imagem que eu quero ultilizar
+FROM node:16.19.0
 
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=improving
+# Pasta de trabalho no docker
+WORKDIR /app/backend
 
-COPY ./sql/sql.sql /docker-entrypoint-initdb.d/
+# Copia os arquivos do PC para o docker
+COPY . ./
 
-EXPOSE 3306
+# Comando para instalar as dependências
+RUN npm i
 
-# docker build -t improving_mysql MySQL.Dockerfile
-# docker build -t improving_mysql .
-# docker run -d -p 3306:3306 improving_mysql
+# Infoma a porta que eu quero exportar para o PC acessar
+EXPOSE 3001
+
+# Comando para iniciar servidor
+# CMD ["npm", "run", "docker"]
+CMD ["npm", "start"]
+
+# docker build -t improving_api .
+# docker run -d -p 3001:3001 improving_api

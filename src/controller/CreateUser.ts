@@ -21,9 +21,9 @@ const CreateUserController = async (
       return res.status(401).json({ message: response });
     }
 
-    const token = await createToken(response.insertId, email);
+    const token = await createToken(response, email);
     res.status(201).json({
-      id: response.insertId,
+      id: response,
       name: name,
       email: email,
       token: token,

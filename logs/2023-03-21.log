@@ -1,0 +1,5 @@
+2023-03-21T14:59:24.402Z [WARN] - Server is running on port 3001 (called by ./index.ts)
+2023-03-21T14:59:38.513Z [INFO] - ID 1 requested conversion between currencies USD and BRL (called by src/controller/convert.ts)
+2023-03-21T15:00:25.166Z [INFO] - ID 1 successfully received the conversion (called by src/controller/convert.ts)
+2023-03-21T15:00:39.559Z [INFO] - ID 1 requested the transactions (called by src/controller/consultTransactions.ts)
+2023-03-21T15:00:40.966Z [INFO] - ID 1 successfully received the transaction (called by src/controller/consultTransactions.ts)

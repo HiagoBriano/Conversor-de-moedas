@@ -1,3 +1,4 @@
+import { Logger } from 'winston';
 import logger from '../log/logger';
 import connection from './connection';
 
@@ -20,8 +21,8 @@ const recordModel = async (
   conversionRateUsed: number
 ) => {
   try {
-    const [record] = await connection.execute(
-      'INSERT INTO improving.record(user_id, origin_currency, origin_value, destination_currency, conversion_rate_used)  VALUES (?, ?, ?, ?, ?);',
+    const record = await connection.query(
+      'INSERT INTO record(user_id, origin_currency, origin_value, destination_currency, conversion_rate_used)  VALUES ($1, $2, $3, $4, $5) RETURNING id, created_at;',
       [
         userId,
         originCurrency,
@@ -31,7 +32,7 @@ const recordModel = async (
       ]
     );
 
-    return record as Record;
+    return {id: record.rows[0].id , data: record.rows[0].created_at};
   } catch (error) {
     logger.error('Error connecting to the database', file);
     throw new Error('error');

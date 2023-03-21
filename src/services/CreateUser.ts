@@ -10,12 +10,11 @@ const createUserService = async (
   password: string
 ) => {
   try {
-    const result = await consultUserByEmailModel(email);
+    let result = await consultUserByEmailModel(email);
 
     if (!result.length) {
-      const newUserData = await createUserModel(name, email, password);
-
-      return newUserData;
+      const user = await createUserModel(name, email, password);
+      return user as number;
     }
     
     logger.warn(`E-mail ${email} already registered`, file);
