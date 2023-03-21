@@ -30,7 +30,6 @@ Implementar uma API Rest que seja capaz de realizar a conversão entre duas moed
 
 - Ter o `Git` instalado em sua máquina;
 - Ter o `docker` instalado e ativado em sua máquina.
-- Ter o `bitbucket` configurado sua máquina com acesso a esse [repositório](https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-hiago.artist_hotmail.com/src/master/).
 
 `Clonar`
 
