@@ -50,7 +50,7 @@ git clone git@github.com:HiagoBriano/Conversor-de-moedas.git
 Entre na pasta principal:
 
 ```
-cd recrutamento-conversor-nodejs-hiago.artist_hotmail.com
+cd Conversor-de-moedas
 ```
 
 Crie um arquivo `.env` com as seguintes informações:
